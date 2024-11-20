@@ -27,22 +27,25 @@ function getPdoConnection() {
 
 function checkLogin($pseudo, $mdp) {
     $pdo = getPdoConnection();
-    $query = $pdo->prepare('SELECT id, mdp FROM membres WHERE pseudo = ?');
+    $query = $pdo->prepare('SELECT id, mdp FROM utilisateur
+     WHERE pseudo = ?');
     $query->execute([$pseudo]);
     $membre = $query->fetch();
     return $membre && password_verify($mdp, $membre['mdp']);
 }
 
-function registerUser($pseudo, $email, $mdp) {
+function registerUser($nom , $prenom ,$pseudo, $email, $mdp) {
     $pdo = getPdoConnection();
     $mdp_hache = password_hash($mdp, PASSWORD_DEFAULT);
-    $query = $pdo->prepare('INSERT INTO membres (pseudo, mdp, email, date_inscription) VALUES (?, ?, ?, CURDATE())');
-    return $query->execute([$pseudo, $mdp_hache, $email]);
+    $query = $pdo->prepare('INSERT INTO utilisateur
+     (nom ,prenom ,pseudo , mdp, email, typeUtilisateur, classe, date_inscription) VALUES (?, ?, ?, ?, ?, ?, ?, CURDATE())');
+    return $query->execute([$nom , $prenom , $pseudo, $mdp_hache, $email , 1 , 5]);
 }
 
 function checkPseudoExists($pseudo) {
     $pdo = getPdoConnection();
-    $check = $pdo->prepare('SELECT id FROM membres WHERE pseudo = ?');
+    $check = $pdo->prepare('SELECT id FROM utilisateur
+     WHERE pseudo = ?');
     $check->execute([$pseudo]);
     return $check->rowCount() > 0;
 }
@@ -56,20 +59,33 @@ function handleRegistrationForm($postData) {
 
     $pseudo = htmlspecialchars($postData['pseudo'] ?? '');
     $email = htmlspecialchars($postData['email'] ?? '');
+    $nom = htmlspecialchars($postData['nom'] ?? '');
+    $prenom = htmlspecialchars($postData['prenom'] ?? '');
     $mdp = $postData['mdp'] ?? '';
     $mdp_confirm = $postData['mdp_confirm'] ?? '';
+
     if ($mdp !== $mdp_confirm) {
+        insertLog("Inscription Échouée : Mots de passe non correspondants pour pseudo : ".$pseudo);
         return "Les mots de passe ne correspondent pas.";
     }
+
     if (checkPseudoExists($pseudo)) {
+        insertLog("Inscription Échouée : Pseudo déjà utilisé : ".$pseudo);
         return "Pseudo déjà utilisé.";
     }
-    if (registerUser($pseudo, $email, $mdp)) {
+
+    if (registerUser($nom , $prenom ,$pseudo, $email, $mdp)) {
+        insertLog("Inscription Réussie : nom : ".$nom." , prenom : ".$prenom." , pseudo : ".$pseudo." , email : ".$email);
         header('Location: connexion.php');
         exit(); 
+    } else {
+        insertLog("Inscription Échouée : nom : ".$nom." , prenom : ".$prenom." , pseudo : ".$pseudo." , email : ".$email);
     }
+
     return "Une erreur s'est produite lors de l'inscription.";
 }
+
+
 
 function handleLoginForm($postData, $pdo) {
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -77,17 +93,33 @@ function handleLoginForm($postData, $pdo) {
     }
     $identifiant = htmlspecialchars($postData['identifiant'] ?? ''); 
     $mdp = $postData['mdp'] ?? '';
-    $query = $pdo->prepare('SELECT id, mdp FROM membres WHERE pseudo = ? OR email = ?');
+    $query = $pdo->prepare('SELECT id, mdp FROM utilisateur
+     WHERE pseudo = ? OR email = ?');
     $query->execute([$identifiant, $identifiant]);
     $membre = $query->fetch();
     if ($membre && password_verify($mdp, $membre['mdp'])) {
         session_start();
         $_SESSION['pseudo'] = $identifiant;
+        insertLog("Connexion Réussie : pseudo : ".$_SESSION['pseudo']." , id : ".$membre['id']);
         header('Location: index.php');
         exit(); 
     }
+    insertLog("Connexion Échouée : pseudo : ".$identifiant);
     return "<p class='reussioupas'>Identifiant ou mot de passe incorrect.</p>";
+
 }
 
+function insertLog($message){
+    $pdo = getPdoConnection();
+    $query = $pdo->prepare('INSERT INTO logs (messageLog, dateLog) VALUES (?,CURDATE())');
+    return $query->execute([$message]);
+}
+
+
 /* */ 
+
+
+
+
+
 ?>

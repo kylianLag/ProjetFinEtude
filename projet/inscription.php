@@ -26,6 +26,14 @@ if ($errorMessage) {
         <h2>Inscription</h2>
         <form method="POST" action="">
             <div class="form-group">
+                <label for="nom">Nom</label>
+                <input type="text" id="nom" name="nom" required>
+            </div>
+            <div class="form-group">
+                <label for="prenom">Prénom</label>
+                <input type="text" id="prenom" name="prenom" required>
+            </div>
+            <div class="form-group">
                 <label for="pseudo">Pseudo</label>
                 <input type="text" id="pseudo" name="pseudo" required>
             </div>
