@@ -1,0 +1,2 @@
+host,dbname,user,password
+localhost,espace_membre,db_user,secure_password
