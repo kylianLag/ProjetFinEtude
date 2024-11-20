@@ -25,8 +25,15 @@
     </main>
 
     <!-- Section image -->
+    <div class="content-section">
     <div class="image-section">
-        <img src="image.png" alt="Illustration cloud" class="background-image">
+        <img src="image_index.png" alt="Illustration cloud" class="background-image">
     </div>
+    <div class="text-section">
+        <p>
+            Voici un texte descriptif qui accompagne l'image. Sur les petits écrans, ce texte apparaîtra sous l'image222222222222222222222222222222222222222222222.
+        </p>
+    </div>
+</div>
 </body>
 </html>

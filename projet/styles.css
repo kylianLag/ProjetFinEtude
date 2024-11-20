@@ -353,16 +353,43 @@ a:hover {
 .container-index {
     max-width: 500px;
 }
-
-/* Section image */
-.image-section {
-    position: relative;
+/* IMAGE ET TEXTE A DROITE */
+.content-section {
+  display: flex;
+  flex-wrap: wrap; /* Permet au contenu de passer à la ligne si l'écran est trop petit */
+  align-items: stretch; /* Étire les éléments pour qu'ils aient la même hauteur */
+  gap: 20px; /* Ajoute un espace entre les éléments */
+  margin: 20px;
 }
 
-.image-section .background-image {
-    width: 100%;
-    height: auto;
-    display: block;
+.image-section {
+  flex: 1 1 300px; /* Minimum 300px pour l'image, s'ajuste jusqu'à 50% */
+  max-width: 50%; /* Limite la largeur à 50% de la section */
+}
+
+.text-section {
+  flex: 1 1 300px; /* Minimum 300px pour le texte, s'ajuste jusqu'à 50% */
+  max-width: 50%; /* Limite la largeur à 50% de la section */
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2), 0 5px 8px rgba(0, 0, 0, 0.2);
+  display: flex; /* Utilisation de Flexbox pour centrer le texte */
+  justify-content: center; /* Centre le texte horizontalement */
+  align-items: center; /* Centre le texte verticalement */
+  text-align: center; /* Centre le texte dans la boîte */
+}
+
+.background-image {
+  width: 100%; /* Ajuste l'image à la largeur de son conteneur */
+  height: auto; /* Maintient les proportions */
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .image-section, .text-section {
+      max-width: 100%; /* Sur les petits écrans, chaque section prend toute la largeur */
+  }
 }
 
 
