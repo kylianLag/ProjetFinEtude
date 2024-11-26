@@ -9,7 +9,7 @@
 <body>
     <!-- Header avec le menu -->
     <?php 
-        include 'navbar.html';
+        include 'navbar.php';
     ?>
 
     <!-- Section principale -->
@@ -23,36 +23,15 @@
             </div>
         </div>
     </main>
-
     <!-- Section image -->
     <div class="content-section">
-    <!-- Carte gauche -->
-    <div class="decoration">
-        <img src="logo.png" alt="Icône à gauche" class="decoration-icon">
-        <p class="decoration-text">Explorez les options SLAM & SISR</p>
+    <div class="image-section">
+        <img src="image_index.png" alt="Illustration cloud" class="background-image">
     </div>
-
-    <!-- Contenu central -->
-    <div class="main-content">
-        <div class="image-section">
-            <img src="image_index.png" alt="Illustration cloud" class="background-image">
-        </div>
-        <div class="card">
-            <div class="card-content">
-                <h2 class="card-title">Bienvenue dans le monde du BTS SIO !</h2>
-                <p class="card-description">
-                    Cette plateforme d'apprentissage est conçue pour accompagner les étudiants de <strong>BTS SIO</strong>, 
-                    qu'ils soient en première ou deuxième année. Découvrez les options <strong>SLAM</strong> et <strong>SISR</strong> grâce à nos outils interactifs et nos cours structurés.
-                </p>
-                <a href="#" class="card-button">En savoir plus</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Carte droite -->
-    <div class="decoration">
-        <img src="logo.png" alt="Icône à droite" class="decoration-icon">
-        <p class="decoration-text">Rejoignez une communauté active</p>
+    <div class="text-section">
+        <p>
+            Voici un texte descriptif qui accompagne l'image. Sur les petits écrans, ce texte apparaîtra sous l'image222222222222222222222222222222222222222222222.
+        </p>
     </div>
 </div>
 </body>

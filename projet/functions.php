@@ -93,7 +93,7 @@ function handleLoginForm($postData, $pdo) {
     }
     $identifiant = htmlspecialchars($postData['identifiant'] ?? ''); 
     $mdp = $postData['mdp'] ?? '';
-    $query = $pdo->prepare('SELECT id, mdp FROM utilisateur
+    $query = $pdo->prepare('SELECT id, mdp , typeUtilisateur FROM utilisateur
      WHERE pseudo = ? OR email = ?');
     $query->execute([$identifiant, $identifiant]);
     $membre = $query->fetch();
@@ -101,6 +101,12 @@ function handleLoginForm($postData, $pdo) {
         session_start();
         $_SESSION['pseudo'] = $identifiant;
         insertLog("Connexion Réussie : pseudo : ".$_SESSION['pseudo']." , id : ".$membre['id']);
+        if($membre['typeUtilisateur'] == 2){
+            $_SESSION['enseignant'] = true;
+        }else{
+            $_SESSION['enseignant'] = false;
+        }
+        $_SESSION['connexion'] = true;
         header('Location: index.php');
         exit(); 
     }
