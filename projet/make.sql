@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : lun. 25 nov. 2024 à 13:25
+-- Généré le : mar. 26 nov. 2024 à 10:40
 -- Version du serveur : 10.4.21-MariaDB
 -- Version de PHP : 8.0.10
 
@@ -69,6 +69,26 @@ INSERT INTO `classe` (`idClasse`, `nom`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `contient`
+--
+
+CREATE TABLE `contient` (
+  `idEvaluation` int(11) NOT NULL,
+  `idUtilisateur` int(11) NOT NULL,
+  `idNote` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `contient`
+--
+
+INSERT INTO `contient` (`idEvaluation`, `idUtilisateur`, `idNote`) VALUES
+(1, 6, 1),
+(1, 6, 2);
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `evaluation`
 --
 
@@ -79,6 +99,13 @@ CREATE TABLE `evaluation` (
   `coef` int(11) NOT NULL,
   `idDiscipline` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `evaluation`
+--
+
+INSERT INTO `evaluation` (`id`, `type`, `nom`, `coef`, `idDiscipline`) VALUES
+(1, 1, 'injection sql', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -103,7 +130,12 @@ INSERT INTO `logs` (`idLog`, `MessageLog`, `dateLog`) VALUES
 (8, 'Connexion Échouée : pseudo : tyty', '2024-11-20'),
 (9, 'Inscription Échouée : Pseudo déjà utilisé : destru14', '2024-11-20'),
 (10, 'Connexion Échouée : pseudo : test', '2024-11-25'),
-(11, 'Connexion Réussie : pseudo : test , id : 12', '2024-11-25');
+(11, 'Connexion Réussie : pseudo : test , id : 12', '2024-11-25'),
+(12, 'Connexion Échouée : pseudo : test', '2024-11-25'),
+(13, 'Connexion Réussie : pseudo : test , id : 12', '2024-11-25'),
+(14, 'Connexion Réussie : pseudo : test , id : 12', '2024-11-25'),
+(15, 'Connexion Réussie : pseudo : test , id : 12', '2024-11-25'),
+(16, 'Connexion Réussie : pseudo : test , id : 12', '2024-11-25');
 
 -- --------------------------------------------------------
 
@@ -117,6 +149,13 @@ CREATE TABLE `module` (
   `idUtilisateur` int(11) NOT NULL,
   `classe` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `module`
+--
+
+INSERT INTO `module` (`id`, `nom`, `idUtilisateur`, `classe`) VALUES
+(1, 'CyberSécurité', 12, 5);
 
 -- --------------------------------------------------------
 
@@ -137,10 +176,35 @@ CREATE TABLE `moyenne` (
 --
 
 CREATE TABLE `note` (
-  `idEvaluation` int(11) NOT NULL,
-  `idEtu` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `note` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `note`
+--
+
+INSERT INTO `note` (`id`, `note`) VALUES
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5),
+(6, 6),
+(7, 7),
+(8, 8),
+(9, 9),
+(10, 10),
+(11, 11),
+(12, 12),
+(13, 13),
+(14, 14),
+(15, 15),
+(16, 16),
+(17, 17),
+(18, 18),
+(19, 19),
+(20, 20);
 
 -- --------------------------------------------------------
 
@@ -187,6 +251,13 @@ CREATE TABLE `typeevaluation` (
   `idEvaluation` int(11) NOT NULL,
   `nom` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `typeevaluation`
+--
+
+INSERT INTO `typeevaluation` (`idEvaluation`, `nom`) VALUES
+(1, 'qcm');
 
 -- --------------------------------------------------------
 
@@ -260,6 +331,14 @@ ALTER TABLE `classe`
   ADD PRIMARY KEY (`idClasse`);
 
 --
+-- Index pour la table `contient`
+--
+ALTER TABLE `contient`
+  ADD KEY `idNote` (`idNote`),
+  ADD KEY `idUtilisateur` (`idUtilisateur`),
+  ADD KEY `idEvaluation` (`idEvaluation`);
+
+--
 -- Index pour la table `evaluation`
 --
 ALTER TABLE `evaluation`
@@ -291,8 +370,7 @@ ALTER TABLE `moyenne`
 -- Index pour la table `note`
 --
 ALTER TABLE `note`
-  ADD PRIMARY KEY (`idEvaluation`,`idEtu`),
-  ADD KEY `idEtu` (`idEtu`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `possede`
@@ -349,19 +427,25 @@ ALTER TABLE `classe`
 -- AUTO_INCREMENT pour la table `evaluation`
 --
 ALTER TABLE `evaluation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `idLog` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `idLog` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT pour la table `module`
 --
 ALTER TABLE `module`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT pour la table `note`
+--
+ALTER TABLE `note`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT pour la table `question`
@@ -406,6 +490,14 @@ ALTER TABLE `avancer`
   ADD CONSTRAINT `avancer_ibfk_2` FOREIGN KEY (`idUtilisateur`) REFERENCES `utilisateur` (`id`);
 
 --
+-- Contraintes pour la table `contient`
+--
+ALTER TABLE `contient`
+  ADD CONSTRAINT `contient_ibfk_1` FOREIGN KEY (`idNote`) REFERENCES `note` (`id`),
+  ADD CONSTRAINT `contient_ibfk_2` FOREIGN KEY (`idEvaluation`) REFERENCES `evaluation` (`id`),
+  ADD CONSTRAINT `contient_ibfk_3` FOREIGN KEY (`idUtilisateur`) REFERENCES `utilisateur` (`id`);
+
+--
 -- Contraintes pour la table `evaluation`
 --
 ALTER TABLE `evaluation`
@@ -424,13 +516,6 @@ ALTER TABLE `module`
 ALTER TABLE `moyenne`
   ADD CONSTRAINT `moyenne_ibfk_1` FOREIGN KEY (`idUtilisateur`) REFERENCES `utilisateur` (`id`),
   ADD CONSTRAINT `moyenne_ibfk_2` FOREIGN KEY (`idModule`) REFERENCES `module` (`id`);
-
---
--- Contraintes pour la table `note`
---
-ALTER TABLE `note`
-  ADD CONSTRAINT `note_ibfk_1` FOREIGN KEY (`idEtu`) REFERENCES `utilisateur` (`id`),
-  ADD CONSTRAINT `note_ibfk_2` FOREIGN KEY (`idEvaluation`) REFERENCES `evaluation` (`id`);
 
 --
 -- Contraintes pour la table `possede`
