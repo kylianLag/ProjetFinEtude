@@ -1,0 +1,454 @@
+/*      */
+
+@keyframes move-background {
+    from {
+      -webkit-transform: translate3d(0px, 0px, 0px);
+    }
+    to { 
+      -webkit-transform: translate3d(1000px, 0px, 0px);
+    }
+  }
+  @-webkit-keyframes move-background {
+    from {
+      -webkit-transform: translate3d(0px, 0px, 0px);
+    }
+    to { 
+      -webkit-transform: translate3d(1000px, 0px, 0px);
+    }
+  }
+  
+  @-moz-keyframes move-background {    
+    from {
+      -webkit-transform: translate3d(0px, 0px, 0px);
+    }
+    to { 
+      -webkit-transform: translate3d(1000px, 0px, 0px);
+    }
+  }
+  
+      @-webkit-keyframes move-background {
+    from {
+      -webkit-transform: translate3d(0px, 0px, 0px);
+    }
+    to { 
+      -webkit-transform: translate3d(1000px, 0px, 0px);
+    }
+  }
+  
+  .background-container{
+    position: fixed;
+    top: 0;
+    left:0;
+    bottom: 0;
+    right: 0;
+  }
+  
+  .stars {
+   background: black url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/stars.png) repeat;
+   position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: block;
+      z-index: 0;
+  }
+  
+  .twinkling{
+    width:10000px;
+    height: 100%;
+    background: transparent url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/twinkling.png") repeat;
+    background-size: 1000px 1000px;
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      z-index: 2;
+      
+      -moz-animation:move-background 70s linear infinite;
+    -ms-animation:move-background 70s linear infinite;
+    -o-animation:move-background 70s linear infinite;
+    -webkit-animation:move-background 70s linear infinite;
+    animation:move-background 70s linear infinite;
+    
+  }
+  
+  .clouds{
+    width:10000px;
+    height: 100%;
+    background: transparent url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/clouds_repeat.png") repeat;
+    background-size: 1000px 1000px;
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      z-index: 3;
+  
+     -moz-animation:move-background 150s linear infinite;
+    -ms-animation:move-background 150s linear infinite;
+    -o-animation:move-background 150s linear infinite;
+    -webkit-animation:move-background 150s linear infinite;
+    animation:move-background 150s linear infinite;
+  }
+  .lune{
+    height: 70vh;
+    width:70vh;
+    position: absolute;
+    z-index: 3;
+    right: 20px;
+  }
+/* Styles généraux */
+body {
+    font-family: Arial, sans-serif;
+    background-color: ghostwhite;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2),0 5px 8px rgba(0, 0, 0, 0.2);;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+h2 {
+    text-align: center;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+/* Formulaire */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #444;
+}
+
+.form-group  button {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.inputContact{
+  width:auto;
+}
+.form-group .inputContact2{
+  width:20em;
+}
+
+button {
+    background-color: #333;
+    color: white;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+/* Liens */
+a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #0056b3;
+}
+
+.center {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.retour {
+    background-color: #333;
+    color: white;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+.retour:hover{
+    color: #ffffffab;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.2);
+    border-width: 10px;
+    border-radius: 5px;
+}
+
+.button-link {
+    display: inline-block;
+    background-color: #333;
+    color: white;
+    padding: 10px 15px;
+    margin: 5px 0;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    box-shadow: 0 5px 7px rgba(0, 0, 0, 0.2)
+}
+.button-link:hover {
+    background-color: #0e0e0e;
+    color: white;
+}
+
+.button-link2 {
+    display: inline-block;
+    background-color: ghostwhite;
+    color: black;
+    padding: 10px 15px;
+    margin: 5px 0;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    box-shadow: 0 5px 7px rgba(0, 0, 0, 0.4);
+    border:1px solid rgba(0, 0, 0, 0.1);
+}
+
+.button-link2:hover {
+    background-color: #555;
+    color: #ccc;
+}
+
+/* Gestion des boutons horizontaux */
+.horizontal-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.horizontal-buttons a {
+    flex: 1;
+    text-align: center;
+}
+
+/* Messages d'erreur et de succès */
+.reussioupas {
+    text-align: center;
+    font-weight: bold;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.reussioupas.success {
+    color: #155724;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+}
+
+.reussioupas.error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+}
+
+/* ######################## */
+/* Page index */
+/* ######################## */
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    -webkit-animation:tracking-in-expand 1.0s cubic-bezier(.215,.61,.355,1.000) both;animation:tracking-in-expand .7s cubic-bezier(.215,.61,.355,1.000) both;
+}
+
+.logo img{
+    display: flex;
+    justify-content: left;
+    
+    max-width: 70px;
+    max-height: 70px;
+    min-width: 50px;
+    min-height: 50px;
+    margin: -10px -10px
+}
+
+.navbar .nav-list {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar .nav-list li a {
+    text-decoration: none;
+    font-size: 16px;
+    color: #333;
+    transition: color 0.3s;
+    transition: ease-in .7s;
+}
+
+.navbar .nav-list li a:hover {
+    color: #000000;
+    transition: ease-in .7s;
+    text-decoration: underline;
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+/* Section principale */
+.main-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 80px 20px;
+    background-color: ghostwhite;
+}
+
+.main-section h1 {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.main-section .subtitle {
+    font-size: 20px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.container-index {
+    max-width: 500px;
+}
+/* IMAGE ET TEXTE A DROITE */
+.content-section {
+  display: flex;
+  flex-wrap: wrap; /* Permet au contenu de passer à la ligne si l'écran est trop petit */
+  align-items: stretch; /* Étire les éléments pour qu'ils aient la même hauteur */
+  gap: 20px; /* Ajoute un espace entre les éléments */
+  margin: 20px;
+}
+
+.image-section {
+  flex: 1 1 300px; /* Minimum 300px pour l'image, s'ajuste jusqu'à 50% */
+  max-width: 50%; /* Limite la largeur à 50% de la section */
+}
+
+.text-section {
+  flex: 1 1 300px; /* Minimum 300px pour le texte, s'ajuste jusqu'à 50% */
+  max-width: 50%; /* Limite la largeur à 50% de la section */
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2), 0 5px 8px rgba(0, 0, 0, 0.2);
+  display: flex; /* Utilisation de Flexbox pour centrer le texte */
+  justify-content: center; /* Centre le texte horizontalement */
+  align-items: center; /* Centre le texte verticalement */
+  text-align: center; /* Centre le texte dans la boîte */
+}
+
+.background-image {
+  width: 100%; /* Ajuste l'image à la largeur de son conteneur */
+  height: auto; /* Maintient les proportions */
+  border-radius: 8px;
+}
+/*
+
+PAGE RESSOURCES
+
+*/
+.upload-container {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+input[type="file"] {
+  margin: 10px 0;
+}
+
+@media (max-width: 768px) {
+  .image-section, .text-section {
+      max-width: 100%; /* Sur les petits écrans, chaque section prend toute la largeur */
+  }
+}
+
+
+/*  KeyFRAME  */
+
+
+/* NavBar */
+
+@-webkit-keyframes tracking-in-expand {
+    0% {
+      letter-spacing: -0.5em;
+      opacity: 0;
+    }
+    40% {
+      opacity: 0.6;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes tracking-in-expand {
+    0% {
+      letter-spacing: -0.5em;
+      opacity: 0;
+    }
+    40% {
+      opacity: 0.6;
+    }
+    100% {
+      opacity: 1;
+    }
+}
+
+
+  
+  
+
+
+
+  
+
