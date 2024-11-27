@@ -1,26 +1,21 @@
 <header class="header">
-        <div class="logo">
-            <img id ="logoImg" src="logo.png">
-        </div>
-        <script type="text/javascript" src="script.js"></script>
-        <nav class="navbar">
-            <ul class="nav-list">
+    <div class="logo">
+        <img src="assets/img/logo.png">
+    </div>
+    <nav class="navbar">
+        <ul class="nav-list">
             <li><a href="index.php">Accueil</a></li>
-                <li><a href="#competences">Compétences</a></li>
-                <li><a href="#cours">Cours</a></li>
-                <li><a href="#exercices">S'exercer</a></li>
-                <li><a href="ressources.php">Resources</a></li>
-                <li><a href="contact.php">Contact</a></li>
-            </ul>
+            <li><a href="dashboard.php">Dashboard</a></li>
+            <li><a href="#exercices">S'exercer</a></li>
+            <li><a href="#resources">Ressources</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
         </nav>
         <div class="auth-buttons">
             <?php
                 session_start(); 
                 if(isset($_SESSION['connexion']) && !$_SESSION['connexion']?? ""){
-
                 }
-                
-
             ?>
             
             <a href='inscription.php' class='button-link2'>S'inscrire</a>
