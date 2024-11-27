@@ -104,6 +104,7 @@ body {
     color: #333;
     margin: 0;
     padding: 0;
+    -webkit-animation:tracking-in-expand 1.0s cubic-bezier(.215,.61,.355,1.000) both;animation:tracking-in-expand .7s cubic-bezier(.215,.61,.355,1.000) both;
 }
 
 .container {
@@ -149,17 +150,12 @@ form {
     color: #444;
 }
 
-.form-group  button {
+.form-group input,
+button {
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 5px;
-}
-.inputContact{
-  width:auto;
-}
-.form-group .inputContact2{
-  width:20em;
 }
 
 button {
@@ -291,7 +287,6 @@ a:hover {
     position: sticky;
     top: 0;
     z-index: 100;
-    -webkit-animation:tracking-in-expand 1.0s cubic-bezier(.215,.61,.355,1.000) both;animation:tracking-in-expand .7s cubic-bezier(.215,.61,.355,1.000) both;
 }
 
 .logo img{
@@ -340,6 +335,7 @@ a:hover {
     text-align: center;
     padding: 80px 20px;
     background-color: ghostwhite;
+    
 }
 
 .main-section h1 {
@@ -358,60 +354,272 @@ a:hover {
 .container-index {
     max-width: 500px;
 }
-/* IMAGE ET TEXTE A DROITE */
+/* CONTENT SECTION*/
+/* SECTION PRINCIPALE */
 .content-section {
   display: flex;
-  flex-wrap: wrap; /* Permet au contenu de passer à la ligne si l'écran est trop petit */
-  align-items: stretch; /* Étire les éléments pour qu'ils aient la même hauteur */
-  gap: 20px; /* Ajoute un espace entre les éléments */
-  margin: 20px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px 5%;
+  background: linear-gradient(120deg, #f5f8fa, #eaf0f5);
+  position: relative;
+  overflow: hidden; /* Pour les décorations superposées */
 }
 
-.image-section {
-  flex: 1 1 300px; /* Minimum 300px pour l'image, s'ajuste jusqu'à 50% */
-  max-width: 50%; /* Limite la largeur à 50% de la section */
-}
-
-.text-section {
-  flex: 1 1 300px; /* Minimum 300px pour le texte, s'ajuste jusqu'à 50% */
-  max-width: 50%; /* Limite la largeur à 50% de la section */
+/* CONTENU CENTRAL */
+.main-content {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2), 0 5px 8px rgba(0, 0, 0, 0.2);
-  display: flex; /* Utilisation de Flexbox pour centrer le texte */
-  justify-content: center; /* Centre le texte horizontalement */
-  align-items: center; /* Centre le texte verticalement */
-  text-align: center; /* Centre le texte dans la boîte */
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  transition:transform 0.3s ease;
+}
+.main-content:hover{
+  transform: scale(1.05);
+}
+/* FORMES DÉCORATIVES AU CENTRE */
+.main-content::before,
+.main-content::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #ddd, #f1f1f1);
+  z-index: -1;
+}
+
+.main-content::before {
+  width: 200px;
+  height: 200px;
+  top: -50px;
+  left: -100px;
+}
+
+.main-content::after {
+  width: 300px;
+  height: 300px;
+  bottom: -100px;
+  right: -150px;
+}
+
+/* IMAGE SECTION */
+.image-section {
+  flex: 1;
+  max-width: 300px;
 }
 
 .background-image {
-  width: 100%; /* Ajuste l'image à la largeur de son conteneur */
-  height: auto; /* Maintient les proportions */
-  border-radius: 8px;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
 }
-/*
 
-PAGE RESSOURCES
+.background-image:hover {
+  transform: scale(1.05);
+}
 
-*/
-.upload-container {
-  background: #ffffff;
+/* CARTE DE TEXTE */
+.card {
+  flex: 2;
+  max-width: 500px;
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-content {
   text-align: center;
 }
 
-input[type="file"] {
-  margin: 10px 0;
+.card-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15px;
 }
 
+.card-description {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.card-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #333;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.card-button:hover {
+  background-color: #555;
+  transform: scale(1.05);
+}
+
+/* DECORATIONS À GAUCHE ET À DROITE */
+.decoration {
+  text-align: center;
+  max-width: 150px;
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 16px;
+  transition:transform 0.3s ease;
+}
+
+.decoration:hover{
+  transform: scale(1.05);
+}
+
+.decoration-icon {
+  width: 100px;
+  height: 70px;
+  margin-bottom: 10px;
+}
+
+.decoration-text {
+  font-size: 14px;
+  color: #333;
+}
+
+/* DASHBOARD */
+
+/* Conteneur principal */
+.dashboard-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* En-tête */
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.dashboard-header h1 {
+  font-size: 28px;
+  color: #444;
+}
+
+/* Groupe des cartes */
+.dashboard-group {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* Cartes individuelles */
+.dashboard-card {
+  background-color: #ffffff;
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 300px;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Progression en arc */
+.arc-progress {
+  position: relative;
+  width: 120px;
+  height: 60px;
+  margin: auto;
+}
+
+.arc-progress svg {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.arc-progress .background {
+  fill: none;
+  stroke: #f0f0f0;
+  stroke-width: 10;
+  d: path("M10,60 A50,50 0 1,1 110,60");
+}
+
+.arc-progress .progress {
+  fill: none;
+  stroke-width: 10;
+  stroke-linecap: round;
+  d: path("M10,60 A50,50 0 1,1 110,60");
+  stroke-dasharray: 157; /* 50% de l'arc */
+  stroke-dashoffset: 157;
+  transition: stroke-dashoffset 0.6s ease, stroke 0.6s ease;
+}
+
+.arc-progress .progress-text {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Détails du module */
+.module-details {
+  margin: 10px 0;
+  font-size: 14px;
+  color: #666;
+}
+
+/* Bouton */
+.btn-resume {
+  background-color: #007BFF;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-resume:hover {
+  background-color: #0056b3;
+}
+
+
+
+/* DASHBOARD */
+
+/* RESPONSIVE */
 @media (max-width: 768px) {
-  .image-section, .text-section {
-      max-width: 100%; /* Sur les petits écrans, chaque section prend toute la largeur */
+  .content-section {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .main-content {
+      flex-direction: column;
+      padding: 20px;
+  }
+
+  .decoration.left,
+  .decoration.right {
+      display: none;
   }
 }
+
 
 
 /*  KeyFRAME  */
