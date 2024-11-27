@@ -160,9 +160,61 @@ function uploadFile($inputName) {
     }
 }
 
+/* FIN UPLOAD*/
 
+/* TABLEAU DE BORD */
 
+// Récupérer la progression des modules pour un utilisateur
+function getUserProgress($userId) {
+    try {
+        $pdo = getPdoConnection();
+        $query = $pdo->prepare(
+            "SELECT 
+                ma.id AS matiere_id, 
+                ma.nom AS matiere_nom,
+                SUM(COALESCE(p.points, 0)) AS total_points, 
+                COUNT(DISTINCT p.quiz_reached) AS quizzes_completed, 
+                m.total_quiz,
+                ma.max_points,  -- On récupère max_points depuis la table matiere
+                COALESCE(SUM(p.points), 0) / (ma.max_points * m.total_quiz) * 100 AS progression
+            FROM matiere ma
+            LEFT JOIN module m ON m.matiere_id = ma.id
+            LEFT JOIN progressions p ON p.matiere_id = m.matiere_id AND p.user_id = ?
+            GROUP BY ma.id, ma.nom, m.total_quiz, ma.max_points
+            ORDER BY ma.nom"
+        );
+        $query->execute([$userId]);
 
+        $modules = $query->fetchAll(PDO::FETCH_ASSOC);
 
+        return $modules;
+    } catch (Exception $e) {
+        echo 'Erreur : ' . $e->getMessage();
+        return [];
+    }
+}
+
+// Mettre à jour la progression d'un utilisateur pour un module donné
+function updateUserProgress($userId, $moduleId, $quizReached, $points) {
+    $pdo = getPdoConnection();
+    $query = $pdo->prepare(
+        'INSERT INTO progressions (user_id, module_id, quiz_reached, points)
+         VALUES (?, ?, ?, ?)
+         ON DUPLICATE KEY UPDATE quiz_reached = ?, points = ?'
+    );
+    return $query->execute([$userId, $moduleId, $quizReached, $points, $quizReached, $points]);
+}
+
+// Récupérer l'état d'un module pour continuer
+function getModuleState($userId, $moduleId) {
+    $pdo = getPdoConnection();
+    $query = $pdo->prepare(
+        'SELECT quiz_reached FROM progressions WHERE user_id = ? AND module_id = ?'
+    );
+    $query->execute([$userId, $moduleId]);
+    return $query->fetch(PDO::FETCH_ASSOC);
+}
+
+/* FIN DASHBOARD */
 
 ?>
